@@ -17,7 +17,7 @@ public class DAOTareaImplementacion implements DAOTarea{
     
     //IMPLEMENTAMOS METODO AGREGAR
     @Override
-    public void agregar(Tarea tarea){
+    public boolean agregar(Tarea tarea){
         try {
             //GENERAMOS LA SENTENCIA SQL
             String sql = "INSERT INTO tareas (fecha_inicio, tarea) VALUES (?, ?)";
@@ -37,23 +37,26 @@ public class DAOTareaImplementacion implements DAOTarea{
             //EJECUTAMOS LA SENTENCIA
             int filasAfectadas = insertar.executeUpdate();
             
-            if (filasAfectadas>0){
-                JOptionPane.showMessageDialog(null, "Tarea agregada con éxito");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo agregar la tarea");
-            }
-            
             insertar.close();
             conexion.close();
+            
+            if (filasAfectadas>0){
+                JOptionPane.showMessageDialog(null, "Tarea agregada con éxito");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo agregar la tarea");
+                return false;
+            }
                     
         } catch (SQLException e) {
             System.out.println(e);
+            return false;
         }
     }
     
     //IMPLEMENTAMOS METODO MODIFICAR
     @Override
-    public void modificar(Tarea tarea) {
+    public boolean modificar(Tarea tarea) {
         try {
             Connection conexion = main.establecerConexion();
             
@@ -64,24 +67,27 @@ public class DAOTareaImplementacion implements DAOTarea{
             
             int filasAfectadas = modificar.executeUpdate();
             
-            if (filasAfectadas>0){
-                JOptionPane.showMessageDialog(null, "Tarea modificada con éxito");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo modificar la tarea");
-            }
-            
             modificar.close();
             conexion.close();
-                   
+            
+            if (filasAfectadas>0){
+                JOptionPane.showMessageDialog(null, "Tarea modificada con éxito");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo modificar la tarea");
+                return false;
+            }
+                  
         } catch (SQLException e) {
             System.out.println(e);
+            return false;
         }
     }
 
     
     //IMPLEMENTAMOS EL METODO ELIMINAR
     @Override
-    public void eliminar(Tarea tarea) {
+    public boolean eliminar(Tarea tarea) {
          try {
             Connection conexion = main.establecerConexion();
             
@@ -91,24 +97,22 @@ public class DAOTareaImplementacion implements DAOTarea{
             
             int filasAfectadas = eliminar.executeUpdate();
             
-            if (filasAfectadas>0){
-                JOptionPane.showMessageDialog(null, "Tarea eliminada con éxito");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo eliminar la tarea");
-            }
-            
             eliminar.close();
             conexion.close();
             
-            
-            
+            if (filasAfectadas>0){
+                JOptionPane.showMessageDialog(null, "Tarea eliminada con éxito");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo eliminar la tarea");
+                return false;
+            }  
         } catch (SQLException e) {
             System.out.println(e);
-        }
-        
+            return false;
+        }   
     }
-
-    
+ 
     //IMPLEMENTAMOS EL METODO BUSCAR
     @Override
     public void buscar(Tarea tarea) {
@@ -127,14 +131,11 @@ public class DAOTareaImplementacion implements DAOTarea{
                 JOptionPane.showMessageDialog(null, "Tarea encontrada");
             }else {
                 JOptionPane.showMessageDialog(null, "No se pudo encontrar la tarea");
-            }
-            
+            }       
             buscar.close();
-            conexion.close();
-            
+            conexion.close();   
         } catch (SQLException e) {
             System.out.println(e);
         }
-    }
-    
+    }   
 }

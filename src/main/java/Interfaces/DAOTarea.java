@@ -4,11 +4,11 @@ import Tarea.Tarea;
 
 public interface DAOTarea {
     
-    public void agregar (Tarea tarea);
+    public boolean agregar (Tarea tarea);
     
-    public void modificar (Tarea tarea);
+    public boolean modificar (Tarea tarea);
     
-    public void eliminar (Tarea tarea);
+    public boolean eliminar (Tarea tarea);
     
     public void buscar (Tarea tarea);
     

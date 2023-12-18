@@ -225,9 +225,10 @@ public class Design extends javax.swing.JFrame {
     
     /*BOTON AGREGAR TAREA*/
     private void btn_agregarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarTareaActionPerformed
-        agregar();
-        limpiar();
-        mostrar();
+        if(agregar()){
+            mostrar();
+            limpiar();
+        }
     }//GEN-LAST:event_btn_agregarTareaActionPerformed
 
     private void btn_buscarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarTareaActionPerformed
@@ -235,15 +236,17 @@ public class Design extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_buscarTareaActionPerformed
 
     private void btn_modificarTareaSeleccionadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarTareaSeleccionadaActionPerformed
-        modificar();
-        mostrar();
-        limpiar();
+        if(modificar()){
+            mostrar();
+            limpiar();
+        }
     }//GEN-LAST:event_btn_modificarTareaSeleccionadaActionPerformed
 
     private void btn_eliminarTareaSeleccionadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarTareaSeleccionadaActionPerformed
-        eliminar();
-        mostrar();
-        limpiar();
+        if(eliminar()){
+            mostrar();
+            limpiar();
+        }
     }//GEN-LAST:event_btn_eliminarTareaSeleccionadaActionPerformed
 
     
@@ -255,7 +258,7 @@ public class Design extends javax.swing.JFrame {
     
     /*-----------------INICIO LOGICA DE BOTONES-------------------*/
     /*METODO AGREGAR*/
-    public void agregar() {
+    public boolean agregar() {
         DAOTareaImplementacion tarea_dao = new DAOTareaImplementacion();
         Tarea tarea = new Tarea();
         
@@ -268,9 +271,10 @@ public class Design extends javax.swing.JFrame {
 
             tarea.setFechaInicio(hoy);
             tarea.setTarea(descripcionTarea);
-
-            tarea_dao.agregar(tarea);             
-        }      
+            
+            return tarea_dao.agregar(tarea);
+        }
+        return false;
     }
         
     /*METODO MOSTRAR*/
@@ -331,7 +335,7 @@ public class Design extends javax.swing.JFrame {
     }
     
     /*METODO PARA MODIFICAR*/
-    public void modificar(){
+    public boolean modificar(){
         DAOTareaImplementacion tarea_dao = new DAOTareaImplementacion();
         Tarea tarea = new Tarea();
         
@@ -346,11 +350,12 @@ public class Design extends javax.swing.JFrame {
                 tarea.setId(id);
                 tarea.setTarea(descripcionTarea);
 
-                tarea_dao.modificar(tarea);
+                return tarea_dao.modificar(tarea);
             } else {
                 JOptionPane.showMessageDialog(null, "El ID a modificar debe ser numérico");
-            }         
-        }       
+            }
+        }    
+        return false;
     }
     
     /*METODO PARA BUSCAR*/
@@ -377,7 +382,7 @@ public class Design extends javax.swing.JFrame {
     
     /*METODO PARA ELIMINAR*/
     
-    public void eliminar(){
+    public boolean eliminar(){
         DAOTareaImplementacion tarea_dao = new DAOTareaImplementacion();
         Tarea tarea = new Tarea();
         
@@ -388,11 +393,12 @@ public class Design extends javax.swing.JFrame {
                 int id = Integer.parseInt(txt_id.getText());
                 
                 tarea.setId(id);
-                tarea_dao.eliminar(tarea);
+                return tarea_dao.eliminar(tarea);
             } else {
                 JOptionPane.showMessageDialog(null, "El ID a eliminar debe ser numérico");
             }
         }
+        return false;
     }
     /*METODO PARA VALIDAR SI UN STRING PUEDE PARSEARSE A ENTERO*/
     public boolean esNumeroEntero(String txt){
@@ -404,6 +410,7 @@ public class Design extends javax.swing.JFrame {
         }
     }
     
+    /*METODO PARA LIMPIAR LOS CAMPOS DE TEXTO*/
     private void limpiar(){
         txt_id.setText("");
         txt_tarea.setText("");
