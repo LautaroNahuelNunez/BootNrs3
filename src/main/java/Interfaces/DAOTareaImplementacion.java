@@ -50,6 +50,7 @@ public class DAOTareaImplementacion implements DAOTarea{
                     
         } catch (SQLException e) {
             System.out.println(e);
+            JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos");
             return false;
         }
     }
@@ -80,6 +81,7 @@ public class DAOTareaImplementacion implements DAOTarea{
                   
         } catch (SQLException e) {
             System.out.println(e);
+            JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos");
             return false;
         }
     }
@@ -109,6 +111,7 @@ public class DAOTareaImplementacion implements DAOTarea{
             }  
         } catch (SQLException e) {
             System.out.println(e);
+            JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos");
             return false;
         }   
     }
@@ -136,6 +139,7 @@ public class DAOTareaImplementacion implements DAOTarea{
             conexion.close();   
         } catch (SQLException e) {
             System.out.println(e);
+            JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos");
         }
     }   
 }

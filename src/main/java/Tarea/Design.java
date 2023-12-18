@@ -249,10 +249,6 @@ public class Design extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_eliminarTareaSeleccionadaActionPerformed
 
-    
-    
-    
-    
     /*-----------------FIN FUNCION DE BOTONES-------------------*/
     
     
